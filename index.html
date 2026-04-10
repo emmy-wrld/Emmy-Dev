@@ -1632,10 +1632,10 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revO
   },400);
 })();
 
-/* ═══ JARVIS AI ═══ */
-(function initJarvis(){
-  const btn=document.getElementById('jarvis-btn');
-  const panel=document.getElementById('jarvis-panel');
+/* ═══ ELLA AI ═══ */
+(function ella(){
+  const btn=document.getElementById('ella-btn');
+  const panel=document.getElementById('ella-panel');
   const closeBtn=document.getElementById('jp-close');
   const msgs=document.getElementById('jp-messages');
   const input=document.getElementById('jp-input');
@@ -1671,7 +1671,7 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revO
     for(const[key,arr] of Object.entries(RESPONSES)){
       if(nq.includes(normalize(key))||key.split(' ').every(w=>nq.includes(w)))return arr;
     }
-    if(nq.includes('hello')||nq.includes('hi'))return['Hello! I\'m J.A.R.V.I.S., Emmy\'s personal AI assistant.','I can tell you about Emmy, PamSam Technologies, ongoing projects, or how to get in contact.','What would you like to know?'];
+    if(nq.includes('hello')||nq.includes('hi'))return['Hello! I\'m E.L.L.A., Emmy\'s personal AI assistant.','I can tell you about Emmy, PamSam Technologies, ongoing projects, or how to get in contact.','What would you like to know?'];
     if(nq.includes('skill')||nq.includes('tech'))return['Emmy\'s tech stack includes React, Next.js, TypeScript, Tailwind CSS, Node.js, Three.js, and more.','Design tools include Figma and the full Adobe Suite.','Emmy is currently exploring AI-integrated developer tooling and 3D web interfaces.'];
     return['That\'s an interesting query. Let me redirect you...','Try asking: "Who is Emmy?", "What is PamSam?", "Show me projects", or "Contact Emmy"','I\'m continuously learning to serve better. 🔵'];
   }
@@ -1686,7 +1686,7 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revO
     d.innerHTML='<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
     msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;
   }
-  async function jarvisRespond(q){
+  async function ellaRespond(q){
     addMsg(q,'user');
     const typing=showTyping();
     await new Promise(r=>setTimeout(r,900+Math.random()*500));
@@ -1705,21 +1705,21 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revO
       });
     }
   }
-  window.jarvisAsk=async function(q){
+  window.ellaAsk=async function(q){
     if(!panel.classList.contains('open'))panel.classList.add('open');
-    await jarvisRespond(q);
+    await ellaRespond(q);
   };
 
   btn.addEventListener('click',()=>{
     panel.classList.toggle('open');
     if(panel.classList.contains('open')&&msgs.children.length===0){
-      setTimeout(()=>jarvisRespond('hello'),300);
+      setTimeout(()=>ellaRespond('hello'),300);
     }
   });
   closeBtn.addEventListener('click',()=>panel.classList.remove('open'));
   async function handleSend(){
     const v=input.value.trim();if(!v)return;input.value='';
-    await jarvisRespond(v);
+    await ellaRespond(v);
   }
   send.addEventListener('click',handleSend);
   input.addEventListener('keydown',e=>{if(e.key==='Enter')handleSend()});
